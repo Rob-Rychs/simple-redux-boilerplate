@@ -17,7 +17,11 @@ This boilerplate is highly inspired by [Ryan Collins' Scalable React Boilerplate
 # TODOs
 
 [x] Create basic boilerplate
+
 [ ] Add more examples
+
 [ ] Add sample apps
+
 [ ] Add tests
+
 [ ] Add comprehensive example with a server
