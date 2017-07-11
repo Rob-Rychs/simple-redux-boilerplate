@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import 'whatwg-fetch';
 import PostsList from '../../components/PostsList';
 import Categories from '../../components/Categories';
 import * as HomePageActions from './actions';
