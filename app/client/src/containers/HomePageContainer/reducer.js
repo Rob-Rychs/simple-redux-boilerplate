@@ -8,7 +8,7 @@ export const initialState = {
 
 const homePageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_POSTS_INITATE: {
+    case types.FETCH_POSTS_INITIATE: {
       return {
         ...state,
         isLoading: true,

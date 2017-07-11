@@ -1,7 +1,7 @@
 import * as types from './types';
 
 export const fetchPostsInitiation = () => ({
-  type: types.FETCH_POSTS_INITATE,
+  type: types.FETCH_POSTS_INITIATE,
 });
 
 export const fetchPostsComplete = posts => ({

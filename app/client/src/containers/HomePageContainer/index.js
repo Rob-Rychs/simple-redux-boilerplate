@@ -19,7 +19,7 @@ class HomePageContainer extends Component {
     })
       .then(res => {
         console.log(`response: ${JSON.stringify(res)}`);
-        actions.fetchPostsComplete(res);
+        actions.fetchPostsComplete(res.data);
       })
       .catch(err => {
         console.log(`error : ${err}`);
