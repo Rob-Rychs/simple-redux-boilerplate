@@ -23,13 +23,10 @@ class HomePageContainer extends Component {
 }
 
 HomePageContainer.propTypes = {
-  posts: PropTypes.oneOf([
-    PropTypes.array.isRequired,
-    PropTypes.object.isRequired,
-  ]).isRequired,
+  posts: PropTypes.array.isRequired, //eslint-disable-line
   actions: PropTypes.object.isRequired, //eslint-disable-line
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.object.isRequired, //eslint-disable-line
+  error: PropTypes.object, //eslint-disable-line
 };
 
 const mapStateToProps = state => ({
