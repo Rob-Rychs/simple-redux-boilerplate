@@ -13,10 +13,15 @@ import {
   initialState as categoriesContainer,
 } from './containers/CategoriesContainer/reducer';
 
+import {
+  initialState as postsByCategoryContainer,
+} from './containers/PostsByCategoryContainer/reducer';
+
 const initialState = {
   // collect initialState from all your containers
   homePageContainer,
   categoriesContainer,
+  postsByCategoryContainer,
 };
 
 const loggerMiddleware = createLogger();
