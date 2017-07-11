@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 
 const CategoriesList = ({ categories }) => (
   <div>
-    <ul>
+    <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
       {categories &&
         categories.map(category => (
           <li key={category.name}>
-            <Link to={`/category/${category.path}`}>{category.name}</Link>
+            <Link to={`/${category.path}/posts`}>
+              <h4>{category.name}</h4>
+            </Link>
           </li>
         ))}
     </ul>
