@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const PostsByCategory = ({ posts }) => (
   <div style={{ margin: 20 }}>
     {posts && posts.length > 0
       ? posts.map(post => (
-          <div key={post.id}>
-            <h3>
-              {post.title}
+          <ol key={post.id}>
+            <li>
+              <Link to={`/posts/${post.id}`}>{post.title}</Link>
               {' '}
               -
               {' '}
               {moment.unix(post.timestamp).format('MM/DD, h:mm a')}
-            </h3>
-            <p>{post.body}</p>
-          </div>
+            </li>
+          </ol>
         ))
       : <p>No Posts</p>}
   </div>
