@@ -11,16 +11,27 @@ import * as CategoriesActions from '../CategoriesContainer/actions';
 class HomePageContainer extends Component {
   componentDidMount() {
     const { actions } = this.props;
-    actions.fetchPosts();
     actions.fetchCategories();
+    actions.fetchPostsInitiation(); // just to show loading message for a while
+    setTimeout(() => {
+      actions.fetchPosts();
+    }, 2000);
   }
   render() {
     const { isLoading, error, posts, categories } = this.props;
     return (
       <div>
-        <div><Categories categories={categories} /></div>
-        {error && !isLoading ? <p>{error.message}</p> : <noscript />}
-        {isLoading && !error ? <h1>Loading</h1> : <HomePage posts={posts} />}
+        <div>
+          <Categories categories={categories} />
+        </div>
+        <div>
+          {error && !isLoading ? <p>{error.message}</p> : <noscript />}
+        </div>
+        <div>
+          {isLoading && !error
+            ? <h1>Loading...</h1>
+            : <HomePage posts={posts} />}
+        </div>
       </div>
     );
   }
