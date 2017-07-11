@@ -25,6 +25,7 @@ const homePageReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
+        isLoading: !state.isLoading,
       };
     }
     default:
