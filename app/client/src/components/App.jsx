@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../store';
 import HomePageContainer from '../containers/HomePageContainer';
+import PostsByCategoryContainer from '../containers/PostsByCategoryContainer';
 
 const FourOhFour = () => <h2>404</h2>;
 
@@ -21,6 +22,11 @@ const App = () => (
         <Switch>
           <Route exact path="/" component={SampleComponent} />
           <Route exact path="/posts" component={HomePageContainer} />
+          <Route
+            exact
+            path="/:category/posts"
+            component={PostsByCategoryContainer}
+          />
           <Route component={FourOhFour} />
         </Switch>
       </div>
