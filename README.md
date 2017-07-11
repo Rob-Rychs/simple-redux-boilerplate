@@ -12,7 +12,7 @@ This is a WIP. I will be adding more examples for using this boilerplate. Lookou
 
 # Inspiration
 
-This boilerplate is highly inspired by [Ryan Collins' Scalable React Boilerplate](https://github.com/scalable-react/scalable-react-boilerplate). You will find a lot of resemblances from Ryan's boilerplate, in this project. If you're looking for Reac+TypeScript boilerplate - check out his [TypeScript Version](https://github.com/scalable-react/scalable-react-typescript-boilerplate) of the same boilerplate.
+This boilerplate is highly inspired by [Ryan Collins' Scalable React Boilerplate](https://github.com/scalable-react/scalable-react-boilerplate). You will find a lot of resemblances from Ryan's boilerplate, in this project. If you're looking for React+TypeScript boilerplate - check out his [TypeScript Version](https://github.com/scalable-react/scalable-react-typescript-boilerplate) of the same boilerplate.
 
 # TODOs
 
