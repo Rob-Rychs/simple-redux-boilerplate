@@ -9,9 +9,14 @@ import {
   initialState as homePageContainer,
 } from './containers/HomePageContainer/reducer';
 
+import {
+  initialState as categoriesContainer,
+} from './containers/CategoriesContainer/reducer';
+
 const initialState = {
   // collect initialState from all your containers
   homePageContainer,
+  categoriesContainer,
 };
 
 const loggerMiddleware = createLogger();
