@@ -9,8 +9,10 @@ import PostsByCategory from '../../components/PostsByCategory';
 class PostsByCategoryContainer extends Component {
   componentDidMount() {
     const category = this.props.match.params.category || null; //eslint-disable-line
-    console.log(category); // eslint-disable-line
-    this.props.actions.fetchPostsByCategory(category); //eslint-disable-line
+    console.log(category);
+    if (category)
+      this.props.actions.fetchPostsByCategory(category); //eslint-disable-line
+    else this.props.actions.fetchPostsByCategoryFailure(); //eslint-disable-line
   }
 
   render() {
@@ -18,6 +20,9 @@ class PostsByCategoryContainer extends Component {
     return (
       <div style={{ margin: 20 }}>
         <div><Link to="/posts">Home</Link></div>
+        <div>
+          {error && !isLoading ? <div>{error.message}</div> : <noscript />}
+        </div>
         {isLoading ? <h4>Loading...</h4> : <PostsByCategory posts={posts} />}
       </div>
     );
