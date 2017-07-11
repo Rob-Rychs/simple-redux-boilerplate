@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 const HomePage = ({ posts }) => (
   <div>
-    {posts ? posts.map(post => <p>{post.title}</p>) : <p>No Posts</p>}
+    {posts
+      ? posts.map(post => <p key={post.id}>{post.title}</p>)
+      : <p>No Posts</p>}
   </div>
 );
 
