@@ -34,10 +34,10 @@ PostsByCategory.propTypes = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      timestamp: PropTypes.number.isRequired,
+      timestamp: PropTypes.any.isRequired,
       title: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
+      author: PropTypes.string,
       category: PropTypes.string.isRequired,
       votescore: PropTypes.number,
       deleted: PropTypes.bool.isRequired,
