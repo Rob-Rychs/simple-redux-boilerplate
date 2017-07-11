@@ -15,13 +15,29 @@ class PostsByCategoryContainer extends Component {
     else this.props.actions.fetchPostsByCategoryFailure(); //eslint-disable-line
   }
 
+  handleSort = value => {
+    console.log(value);
+    this.props.actions.setSortByKey(value); //eslint-disable-line
+  };
+
   render() {
-    const { isLoading, error, posts } = this.props; // eslint-disable-line
+    const { isLoading, error, posts, sortBy } = this.props; // eslint-disable-line
     return (
       <div style={{ margin: 20 }}>
         <div><Link to="/posts">Home</Link></div>
         <div>
           {error && !isLoading ? <div>{error.message}</div> : <noscript />}
+        </div>
+        <div>
+          <select
+            value={sortBy || 'none'}
+            onChange={e => this.handleSort(e.target.value)}
+          >
+            <option value="none" disabled>Sort By...</option>
+            <option value="timestamp">By Date</option>
+            <option value="voteScore">By Votes</option>
+            <option value="remove">None</option>
+          </select>
         </div>
         {isLoading ? <h4>Loading...</h4> : <PostsByCategory posts={posts} />}
       </div>
@@ -33,6 +49,7 @@ const mapStateToProps = state => ({
   posts: state.postsByCategoryContainer.posts,
   isLoading: state.postsByCategoryContainer.isLoading,
   error: state.postsByCategoryContainer.error,
+  sortBy: state.postsByCategoryContainer.sortBy,
 });
 
 const mapDispatchToProps = dispatch => ({
