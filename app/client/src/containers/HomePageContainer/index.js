@@ -6,25 +6,10 @@ import 'whatwg-fetch';
 import HomePage from '../../components/HomePage';
 import * as HomePageActions from './actions';
 
-const API_URL = 'http://localhost:5001';
-
 class HomePageContainer extends Component {
   componentDidMount() {
     const { actions } = this.props;
-    actions.fetchPostsInitiation();
-    fetch(`${API_URL}/posts`, {
-      headers: {
-        Authorization: 'foo',
-      },
-    })
-      .then(res => {
-        console.log(`response: ${JSON.stringify(res)}`);
-        actions.fetchPostsComplete(res.data);
-      })
-      .catch(err => {
-        console.log(`error : ${err}`);
-        actions.fetchPostsFailure(err);
-      });
+    actions.fetchPosts();
   }
   render() {
     const { isLoading, error, posts } = this.props;
