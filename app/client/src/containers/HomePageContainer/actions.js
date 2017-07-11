@@ -21,7 +21,7 @@ export const fetchPosts = () => dispatch => {
 
   fetch(`${API_URL}/posts`, {
     headers: {
-      Authorization: 'foo',
+      Authorization: 'bar',
     },
   })
     .then(res => res.json())

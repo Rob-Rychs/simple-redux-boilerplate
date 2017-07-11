@@ -21,7 +21,7 @@ export const fetchCategories = () => dispatch => {
 
   fetch(`${API_URL}/categories`, {
     headers: {
-      Authorization: 'foo',
+      Authorization: 'bar',
     },
   })
     .then(res => res.json())

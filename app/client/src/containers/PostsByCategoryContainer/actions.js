@@ -20,7 +20,7 @@ export const fetchPostsByCategory = category => dispatch => {
   dispatch(fetchPostsByCategoryInitiate());
   fetch(`${API_URL}/${category}/posts`, {
     headers: {
-      Authorization: 'foo',
+      Authorization: 'bar',
     },
   })
     .then(res => res.json())
@@ -29,3 +29,8 @@ export const fetchPostsByCategory = category => dispatch => {
     })
     .catch(err => dispatch(fetchPostsByCategoryFailure(err)));
 };
+
+export const setSortByKey = key => ({
+  type: types.SET_SORT_BY,
+  payload: key,
+});
