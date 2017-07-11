@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../store';
-// import HomePage from './HomePage';
+import HomePageContainer from '../containers/HomePageContainer';
 
 const FourOhFour = () => <h2>404</h2>;
 
@@ -20,6 +20,7 @@ const App = () => (
       <div className="app">
         <Switch>
           <Route exact path="/" component={SampleComponent} />
+          <Route exact path="/posts" component={HomePageContainer} />
           <Route component={FourOhFour} />
         </Switch>
       </div>

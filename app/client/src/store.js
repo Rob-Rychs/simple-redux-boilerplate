@@ -5,12 +5,13 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import rootReducer from './reducers';
 
-// import {
-//   initialState as navbarContainer,
-// } from './containers/NavbarContainer/reducer';
+import {
+  initialState as homePageContainer,
+} from './containers/HomePageContainer/reducer';
 
 const initialState = {
   // collect initialState from all your containers
+  homePageContainer,
 };
 
 const loggerMiddleware = createLogger();
