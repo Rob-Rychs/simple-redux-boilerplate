@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
-import HomePage from '../../components/HomePage';
+import PostsList from '../../components/PostsList';
 import Categories from '../../components/Categories';
 import * as HomePageActions from './actions';
 import * as CategoriesActions from '../CategoriesContainer/actions';
@@ -20,7 +20,7 @@ class HomePageContainer extends Component {
   render() {
     const { isLoading, error, posts, categories } = this.props;
     return (
-      <div>
+      <div style={{ margin: 20 }}>
         <div>
           <Categories categories={categories} />
         </div>
@@ -28,9 +28,10 @@ class HomePageContainer extends Component {
           {error && !isLoading ? <p>{error.message}</p> : <noscript />}
         </div>
         <div>
+          <h1>All Articles</h1>
           {isLoading && !error
-            ? <h1>Loading...</h1>
-            : <HomePage posts={posts} />}
+            ? <h4>Loading...</h4>
+            : <PostsList posts={posts} />}
         </div>
       </div>
     );

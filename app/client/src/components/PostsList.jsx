@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const HomePage = ({ posts }) => (
+const PostsList = ({ posts }) => (
   <div>
     {posts
       ? posts.map(post => <p key={post.id}>{post.title}</p>)
@@ -9,8 +9,8 @@ const HomePage = ({ posts }) => (
   </div>
 );
 
-HomePage.propTypes = {
+PostsList.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default HomePage;
+export default PostsList;
