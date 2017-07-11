@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from '../store';
 import HomePageContainer from '../containers/HomePageContainer';
 import PostsByCategoryContainer from '../containers/PostsByCategoryContainer';
+import SinglePostContainer from '../containers/SinglePostContainer';
 
 const FourOhFour = () => <h2>404</h2>;
 
@@ -27,6 +28,7 @@ const App = () => (
             path="/:category/posts"
             component={PostsByCategoryContainer}
           />
+          <Route exact path="/posts/:postId" component={SinglePostContainer} />
           <Route component={FourOhFour} />
         </Switch>
       </div>

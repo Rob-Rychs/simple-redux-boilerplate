@@ -17,11 +17,16 @@ import {
   initialState as postsByCategoryContainer,
 } from './containers/PostsByCategoryContainer/reducer';
 
+import {
+  initialState as singlePostContainer,
+} from './containers/SinglePostContainer/reducer';
+
 const initialState = {
   // collect initialState from all your containers
   homePageContainer,
   categoriesContainer,
   postsByCategoryContainer,
+  singlePostContainer,
 };
 
 const loggerMiddleware = createLogger();

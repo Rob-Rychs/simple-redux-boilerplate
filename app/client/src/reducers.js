@@ -5,6 +5,7 @@ import homePageContainer from './containers/HomePageContainer/reducer';
 import categoriesContainer from './containers/CategoriesContainer/reducer';
 import postsByCategoryContainer
   from './containers/PostsByCategoryContainer/reducer';
+import singlePostContainer from './containers/SinglePostContainer/reducer';
 
 const rootReducer = combineReducers({
   // combine all your reducers here
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   homePageContainer,
   categoriesContainer,
   postsByCategoryContainer,
+  singlePostContainer,
 });
 
 export default rootReducer;

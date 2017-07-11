@@ -7,7 +7,7 @@ const PostsByCategory = ({ posts }) => (
   <div style={{ margin: 20 }}>
     {posts && posts.length > 0
       ? posts.map(post => (
-          <ol key={post.id}>
+          <ul key={post.id}>
             <li>
               <Link to={`/posts/${post.id}`}>{post.title}</Link>
               {' '}
@@ -15,7 +15,7 @@ const PostsByCategory = ({ posts }) => (
               {' '}
               {moment.unix(post.timestamp).format('MM/DD, h:mm a')}
             </li>
-          </ol>
+          </ul>
         ))
       : <p>No Posts</p>}
   </div>
