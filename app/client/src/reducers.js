@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-
+import { reducer as formReducer } from 'redux-form';
 import homePageContainer from './containers/HomePageContainer/reducer';
 import categoriesContainer from './containers/CategoriesContainer/reducer';
 import postsByCategoryContainer
@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
   categoriesContainer,
   postsByCategoryContainer,
   singlePostContainer,
+  form: formReducer,
 });
 
 export default rootReducer;

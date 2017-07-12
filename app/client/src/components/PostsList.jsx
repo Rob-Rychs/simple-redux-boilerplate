@@ -7,7 +7,7 @@ const PostsList = ({ posts }) => (
     <ul>
       {posts
         ? posts.map(post => (
-            <Link to={`/posts/${post.id}`}>
+            <Link key={post.id} to={`/posts/${post.id}`}>
               <li style={{ margin: 10 }} key={post.id}>{post.title}</li>
             </Link>
           ))
