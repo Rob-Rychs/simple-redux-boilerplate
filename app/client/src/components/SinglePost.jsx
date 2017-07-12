@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 // "id": "6ni6ok3ym7mf1p33lnez",
 // "timestamp": 1468479767190,
@@ -30,8 +31,18 @@ const SinglePost = ({
     </p>
     <div>{body}</div>
     <p>By - {owner || 'Unknown'}</p>
-    <p>Category - {category || 'Random'}</p>
+    <p>
+      Category - <Link to={`/${category}/posts`}>{category || 'Random'}</Link>
+    </p>
     <p>Vote: {voteScore || 0}</p>
+    <hr />
+    <div>
+      {comments && comments.length > 0
+        ? comments.map(comment => (
+            <div>{comment.body} - <b>{comment.author}</b> <br /><br /></div>
+          ))
+        : 'No Comments'}
+    </div>
   </div>
 );
 

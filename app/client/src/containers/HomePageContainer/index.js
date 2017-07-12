@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PostsList from '../../components/PostsList';
 import Categories from '../../components/Categories';
@@ -14,7 +15,7 @@ class HomePageContainer extends Component {
     actions.fetchPostsInitiation(); // just to show loading message for a while
     setTimeout(() => {
       actions.fetchPosts();
-    }, 2000);
+    }, 500);
   }
   render() {
     const { isLoading, error, posts, categories } = this.props;
@@ -22,6 +23,9 @@ class HomePageContainer extends Component {
       <div style={{ margin: 20 }}>
         <div>
           <Categories categories={categories} />
+        </div>
+        <div>
+          <Link to="/newpost">New Post</Link>
         </div>
         <div>
           {error && !isLoading ? <p>{error.message}</p> : <noscript />}

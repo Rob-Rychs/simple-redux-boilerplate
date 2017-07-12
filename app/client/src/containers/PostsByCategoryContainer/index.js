@@ -34,8 +34,8 @@ class PostsByCategoryContainer extends Component {
             onChange={e => this.handleSort(e.target.value)}
           >
             <option value="none" disabled>Sort By...</option>
-            <option value="timestamp">By Date</option>
-            <option value="voteScore">By Votes</option>
+            <option value="timestamp">Date</option>
+            <option value="voteScore">Votes</option>
             <option value="remove">None</option>
           </select>
         </div>

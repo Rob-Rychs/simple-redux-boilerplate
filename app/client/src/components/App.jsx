@@ -5,6 +5,7 @@ import store from '../store';
 import HomePageContainer from '../containers/HomePageContainer';
 import PostsByCategoryContainer from '../containers/PostsByCategoryContainer';
 import SinglePostContainer from '../containers/SinglePostContainer';
+import NewPostContainer from '../containers/NewPostContainer';
 
 const FourOhFour = () => <h2>404</h2>;
 
@@ -29,6 +30,7 @@ const App = () => (
             component={PostsByCategoryContainer}
           />
           <Route exact path="/posts/:postId" component={SinglePostContainer} />
+          <Route exact path="/newpost" component={NewPostContainer} />
           <Route component={FourOhFour} />
         </Switch>
       </div>
