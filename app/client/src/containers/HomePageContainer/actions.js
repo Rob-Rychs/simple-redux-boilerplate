@@ -26,7 +26,6 @@ export const fetchPosts = () => dispatch => {
   })
     .then(res => res.json())
     .then(posts => {
-      console.log(`response: ${posts}`);
       dispatch(fetchPostsComplete(posts));
     })
     .catch(err => {
