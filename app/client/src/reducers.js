@@ -6,6 +6,7 @@ import categoriesContainer from './containers/CategoriesContainer/reducer';
 import postsByCategoryContainer
   from './containers/PostsByCategoryContainer/reducer';
 import singlePostContainer from './containers/SinglePostContainer/reducer';
+import newPostContainer from './containers/NewPostContainer/reducer';
 
 const rootReducer = combineReducers({
   // combine all your reducers here
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   categoriesContainer,
   postsByCategoryContainer,
   singlePostContainer,
+  newPostContainer,
   form: formReducer,
 });
 
