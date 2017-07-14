@@ -21,25 +21,44 @@ const SinglePost = ({
   category,
   voteScore,
   comments, // eslint-disable-line
+  onDelete,
 }) => (
   <div style={{ margin: 20 }}>
-    <h3>{title}</h3>
+    <h3>{title} - <span>By - {author || 'Unknown'}</span></h3>
     <p>
       {timestamp
         ? moment.unix(timestamp).format('MM/DD, h:mm a')
         : 'Not Available'}
     </p>
-    <div>{body}</div>
-    <p>By - {author || 'Unknown'}</p>
+    <div style={{ pading: 5, marginBottom: 3 }}>{body}</div>
+    <p />
     <p>
       Category - <Link to={`/${category}/posts`}>{category || 'Random'}</Link>
     </p>
     <p>Vote: {voteScore || 0}</p>
+    <div style={{ pading: 5, marginBottom: 3 }}>
+      <button
+        onClick={onDelete}
+        style={{
+          margin: 5,
+          width: '70px',
+          height: '35px',
+          borderRadius: 2,
+          borderStyle: 'none',
+          color: 'white',
+          backgroundColor: 'red',
+        }}
+      >
+        Delete
+      </button>
+    </div>
     <hr />
     <div>
       {comments && comments.length > 0
         ? comments.map(comment => (
-            <div>{comment.body} - <b>{comment.author}</b> <br /><br /></div>
+            <div key={comment.id}>
+              {comment.body} - <b>{comment.author}</b> <br /><br />
+            </div>
           ))
         : 'No Comments'}
     </div>
@@ -54,6 +73,7 @@ SinglePost.propTypes = {
   author: PropTypes.string, // eslint-disable-line
   category: PropTypes.string.isRequired,
   voteScore: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default SinglePost;

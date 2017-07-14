@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as NewPostActions from './actions';
@@ -37,8 +38,8 @@ class NewPostContainer extends Component {
 }
 
 NewPostContainer.contextTypes = {
-  router: React.PropTypes.shape({
-    history: React.PropTypes.object.isRequired,
+  router: PropTypes.shape({
+    history: PropTypes.object.isRequired,
   }),
 };
 

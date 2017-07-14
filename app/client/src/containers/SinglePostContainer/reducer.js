@@ -15,6 +15,12 @@ const singlePostReducer = (state = initialState, action) => {
         isLoading: true,
       };
     }
+    case types.DELETE_POST_INIT: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
     case types.FETCH_POST_SUCCESS: {
       return {
         ...state,
@@ -23,12 +29,25 @@ const singlePostReducer = (state = initialState, action) => {
         error: null,
       };
     }
+    case types.DELETE_POST_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
     case types.FETCH_POST_FAILURE: {
       return {
         ...state,
-        post: {},
         isLoading: false,
         error: action.payload,
+      };
+    }
+    case types.DELETE_POST_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        post: null,
       };
     }
     case types.FETCH_POST_COMMENTS_SUCCESS: {
