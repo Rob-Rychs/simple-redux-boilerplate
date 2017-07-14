@@ -19,6 +19,7 @@ class HomePageContainer extends Component {
   }
   render() {
     const { isLoading, error, posts, categories } = this.props;
+    const filteredPosts = posts.filter(post => !post.deleted);
     return (
       <div style={{ margin: 20 }}>
         <div>
@@ -32,9 +33,11 @@ class HomePageContainer extends Component {
         </div>
         <div>
           <h1>All Articles</h1>
-          {isLoading && !error
+          {isLoading && !error //eslint-disable-line
             ? <h4>Loading...</h4>
-            : <PostsList posts={posts} />}
+            : Object.keys(filteredPosts).length > 0
+                ? <PostsList posts={filteredPosts} />
+                : <h2>No Posts to show...</h2>}
         </div>
       </div>
     );
