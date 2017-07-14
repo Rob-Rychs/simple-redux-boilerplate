@@ -22,6 +22,7 @@ const SinglePost = ({
   voteScore,
   comments, // eslint-disable-line
   onDelete,
+  onEdit,
 }) => (
   <div style={{ margin: 20 }}>
     <div>
@@ -40,6 +41,20 @@ const SinglePost = ({
     </p>
     <p>Vote: {voteScore || 0}</p>
     <div style={{ pading: 5, marginBottom: 3 }}>
+      <button
+        onClick={onEdit}
+        style={{
+          margin: 5,
+          width: '70px',
+          height: '35px',
+          borderRadius: 2,
+          borderStyle: 'none',
+          color: 'white',
+          backgroundColor: 'cornflowerblue',
+        }}
+      >
+        Edit
+      </button>
       <button
         onClick={onDelete}
         style={{
@@ -77,6 +92,7 @@ SinglePost.propTypes = {
   category: PropTypes.string.isRequired,
   voteScore: PropTypes.number.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default SinglePost;

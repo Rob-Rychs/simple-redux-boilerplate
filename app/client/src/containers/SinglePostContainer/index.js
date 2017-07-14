@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -23,7 +24,13 @@ class SinglePostContainer extends Component {
     actions.deletePost(postId);
   };
   render() {
-    const { post, comments, isLoading, error } = this.props; // eslint-disable-line
+    const {
+      post,
+      comments,
+      isLoading,
+      error,
+      match: { params: { postId } },
+    } = this.props;
     return (
       <div>
         <div>
@@ -37,6 +44,8 @@ class SinglePostContainer extends Component {
                     {...post}
                     comments={comments}
                     onDelete={this.handleDelete}
+                    onEdit={() =>
+                      (window.location.href = `/posts/${postId}/edit`)}
                   />}
         </div>
         {}
