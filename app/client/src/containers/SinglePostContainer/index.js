@@ -8,9 +8,9 @@ import * as SinglePostActions from './actions';
 
 class SinglePostContainer extends Component {
   componentDidMount() {
-    const { actions, match } = this.props; //eslint-disable-line
-    console.log(match.params.postId);
-    actions.fetchPostDetails(match.params.postId);
+    const { actions, match: { params: { postId } } } = this.props; //eslint-disable-line
+    console.log(postId);
+    actions.fetchPostDetails(postId);
   }
   render() {
     const { post, comments, isLoading, error } = this.props; // eslint-disable-line
