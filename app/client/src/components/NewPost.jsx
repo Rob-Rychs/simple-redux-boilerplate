@@ -2,33 +2,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-
+import { min15, max100, required } from '../utils/validations';
 const renderTextField = ({
   input,
+  textarea,
   label,
   type,
   meta: { touched, error, warning },
-}) => (
-  <div>
-    <label htmlFor={label}>{label}: </label>
-    <input {...input} placeholder={label} type={type} />
-    {touched &&
-      ((error &&
-        <span>
-          {error}
-        </span>) ||
-        (warning &&
-          <span>
-            {warning}
-          </span>))}
-  </div>
-);
+}) => {
+  const textareaType = <textarea {...input} placeholder={label} type={type} />;
+  const inputType = <input {...input} placeholder={label} type={type} />;
+  return (
+    <div>
+      <label htmlFor={label}>{label}: </label>
+      {textarea ? textareaType : inputType}
+      {touched &&
+        ((error &&
+          <span style={{ color: 'red', marginLeft: 3 }}>
+            {error}
+          </span>) ||
+          (warning &&
+            <span>
+              {warning}
+            </span>))}
+    </div>
+  );
+};
 
 //eslint-disable-next-line
 let NewPost = props => (
   <div style={{ margin: 20 }}>
     <h1>New Post</h1>
     <hr />
+    {props.error && <strong>{props.error}</strong>}
     <form onSubmit={props.handleSubmit(props.doSubmit)}>
       <Field
         name="title"
@@ -38,12 +44,19 @@ let NewPost = props => (
       />
       <br />
       <div>
-        <label>Body: </label>
+        {/* <label>Body: </label> */}
         <Field
+          name="body"
+          type="textarea"
+          component={renderTextField}
+          label="Body"
+          textarea
+        />
+        {/* <Field
           name="body"
           component="textarea"
           placeholder="Body of your post..."
-        />
+        /> */}
       </div>
       <br />
       <Field
@@ -72,6 +85,7 @@ let NewPost = props => (
             color: 'white',
             backgroundColor: 'green',
           }}
+          disabled={props.submitting}
         >
           Post!
         </button>
@@ -87,6 +101,7 @@ let NewPost = props => (
             color: 'white',
             backgroundColor: 'red',
           }}
+          disabled={props.pristine || props.submitting}
         >
           Cancel
         </button>
@@ -95,6 +110,20 @@ let NewPost = props => (
   </div>
 );
 
+const validate = values => {
+  const errors = {};
+  const category = ['react', 'redux', 'udacity'];
+  if (!values.title) errors.title = 'Required';
+  if (!values.body) errors.body = 'Required';
+  if (!values.author) errors.author = 'Required';
+  if (!category.includes(values.category))
+    errors.category = `Category should be from following: ${category.join(', ')}`;
+  // Object.keys(values).map(key => {
+  //   if (!values.key) errors.key = 'Required';
+  // });
+  return errors;
+};
+
 NewPost.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   doSubmit: PropTypes.func.isRequired,
@@ -102,6 +131,7 @@ NewPost.propTypes = {
 
 NewPost = reduxForm({
   form: 'newPostForm',
+  validate,
 })(NewPost);
 
 export default NewPost;
