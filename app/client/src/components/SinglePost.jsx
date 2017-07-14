@@ -17,7 +17,7 @@ const SinglePost = ({
   timestamp,
   title,
   body,
-  owner,
+  author,
   category,
   voteScore,
   comments, // eslint-disable-line
@@ -30,7 +30,7 @@ const SinglePost = ({
         : 'Not Available'}
     </p>
     <div>{body}</div>
-    <p>By - {owner || 'Unknown'}</p>
+    <p>By - {author || 'Unknown'}</p>
     <p>
       Category - <Link to={`/${category}/posts`}>{category || 'Random'}</Link>
     </p>
@@ -51,7 +51,7 @@ SinglePost.propTypes = {
   timestamp: PropTypes.any.isRequired, // eslint-disable-line
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  owner: PropTypes.string, // eslint-disable-line
+  author: PropTypes.string, // eslint-disable-line
   category: PropTypes.string.isRequired,
   voteScore: PropTypes.number.isRequired,
 };
