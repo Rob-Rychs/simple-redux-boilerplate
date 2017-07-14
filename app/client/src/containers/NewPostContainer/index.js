@@ -14,9 +14,9 @@ class NewPostContainer extends Component {
     // alert(JSON.stringify(values));
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.post) {
-      alert('post received');
+  componentWillReceiveProps({ post }) {
+    if (post) {
+      this.context.router.history.push(`/posts/${post.id}`);
     }
   }
 
@@ -36,9 +36,16 @@ class NewPostContainer extends Component {
   }
 }
 
+NewPostContainer.contextTypes = {
+  router: React.PropTypes.shape({
+    history: React.PropTypes.object.isRequired,
+  }),
+};
+
 const mapStateToProps = state => ({
   isLoading: state.newPostContainer.isLoading,
   error: state.newPostContainer.error,
+  post: state.newPostContainer.post,
 });
 
 const mapDispatchToProps = dispatch => ({
