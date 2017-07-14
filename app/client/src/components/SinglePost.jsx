@@ -24,6 +24,9 @@ const SinglePost = ({
   onDelete,
 }) => (
   <div style={{ margin: 20 }}>
+    <div>
+      <Link to="/posts">Home </Link>
+    </div>
     <h3>{title} - <span>By - {author || 'Unknown'}</span></h3>
     <p>
       {timestamp
