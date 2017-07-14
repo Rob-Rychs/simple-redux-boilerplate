@@ -1,37 +1,107 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
-const NewPost = props => (
+const renderTextField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning },
+}) => (
   <div>
-    <form onSubmit={props.onSubmit}>
+    <label htmlFor={label}>{label}: </label>
+    <input {...input} placeholder={label} type={type} />
+    {touched &&
+      ((error &&
+        <span>
+          {error}
+        </span>) ||
+        (warning &&
+          <span>
+            {warning}
+          </span>))}
+  </div>
+);
+
+//eslint-disable-next-line
+let NewPost = props => (
+  <div style={{ margin: 20 }}>
+    <h1>New Post</h1>
+    <hr />
+    <form onSubmit={props.handleSubmit(props.doSubmit)}>
+      <Field
+        name="title"
+        type="text"
+        component={renderTextField}
+        label="Title"
+      />
+      <br />
       <div>
-        <label htmlFor="postTitle">Title</label>
-        <Field name="postTitle" component={React.DOM.input} type="text" />
+        <label>Body: </label>
+        <Field
+          name="body"
+          component="textarea"
+          placeholder="Body of your post..."
+        />
       </div>
-      <div>
-        <label htmlFor="postBody">Body</label>
-        <Field name="postBody" component={React.DOM.input} type="text" />
+      <br />
+      <Field
+        name="author"
+        type="text"
+        component={renderTextField}
+        label="Author"
+      />
+      <br />
+      <Field
+        name="category"
+        type="text"
+        component={renderTextField}
+        label="Category"
+      />
+      <br />
+      <div style={{ display: 'flex' }}>
+        <button
+          type="submit"
+          style={{
+            margin: 5,
+            width: '70px',
+            height: '35px',
+            borderRadius: 2,
+            borderStyle: 'none',
+            color: 'white',
+            backgroundColor: 'green',
+          }}
+        >
+          Post!
+        </button>
+        <button
+          type="reset"
+          onClick={props.reset}
+          style={{
+            margin: 5,
+            width: '70px',
+            height: '35px',
+            borderRadius: 2,
+            borderStyle: 'none',
+            color: 'white',
+            backgroundColor: 'red',
+          }}
+        >
+          Cancel
+        </button>
       </div>
-      <div>
-        <label htmlFor="category">Category</label>
-        <Field name="category" component={React.DOM.input} type="text" />
-      </div>
-      <div>
-        <label htmlFor="author">Author</label>
-        <Field name="author" component={React.DOM.input} type="text" />
-      </div>
-      <button type="submit">Post!</button>
     </form>
   </div>
 );
 
 NewPost.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  doSubmit: PropTypes.func.isRequired,
 };
 
-// NewPost = reduxForm({
-//   form: 'newPostForm',
-// })(NewPost);
+NewPost = reduxForm({
+  form: 'newPostForm',
+})(NewPost);
 
 export default NewPost;
