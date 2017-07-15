@@ -30,6 +30,11 @@ const App = () => (
             component={PostsByCategoryContainer}
           />
           <Route exact path="/posts/:postId" component={SinglePostContainer} />
+          <Route
+            exact
+            path="/posts/:postId/edit"
+            component={() => <h2>Edit Page</h2>}
+          />
           <Route exact path="/newpost" component={NewPostContainer} />
           <Route component={FourOhFour} />
         </Switch>
