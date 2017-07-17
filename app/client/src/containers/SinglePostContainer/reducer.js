@@ -5,6 +5,7 @@ export const initialState = {
   comments: [],
   isLoading: false,
   error: null,
+  commentError: null,
 };
 
 const singlePostReducer = (state = initialState, action) => {
@@ -61,6 +62,18 @@ const singlePostReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
       };
+    }
+    case types.NEW_COMMENT_INIT: {
+      return { ...state }
+    }
+    case types.NEW_COMMENT_SUCCESS: {
+      return { ...state }
+    }
+    case types.NEW_COMMENT_FAILURE: {
+      return {
+        ...state,
+        commentError: action.payload,
+      }
     }
     default:
       return state;

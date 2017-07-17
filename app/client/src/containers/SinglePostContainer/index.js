@@ -9,7 +9,7 @@ import * as SinglePostActions from './actions';
 
 class SinglePostContainer extends Component {
   componentDidMount() {
-    const { actions, match: { params: { postId } } } = this.props; //eslint-disable-line
+    const { actions, match: { params: { postId } } } = this.props;
     console.log(postId);
     actions.fetchPostDetails(postId);
   }
@@ -20,9 +20,14 @@ class SinglePostContainer extends Component {
   }
   handleDelete = e => {
     e.preventDefault();
-    const { actions, match: { params: { postId } } } = this.props; //eslint-disable-line
+    const { actions, match: { params: { postId } } } = this.props;
     actions.deletePost(postId);
   };
+  handleSubmit = values => {
+    alert(JSON.stringify(values));
+    const { actions, match: { params: { postId } } } = this.props;
+    actions.newComment(values, postId);
+  }
   render() {
     const {
       post,
@@ -46,9 +51,9 @@ class SinglePostContainer extends Component {
                     onDelete={this.handleDelete}
                     onEdit={() =>
                       (window.location.href = `/posts/${postId}/edit`)}
+                    doSubmit={this.handleSubmit}
                   />}
         </div>
-        {}
       </div>
     );
   }

@@ -12,7 +12,6 @@ class NewPostContainer extends Component {
     console.log('form submitted');
     const { actions } = this.props;
     actions.submitNewPost(values);
-    // alert(JSON.stringify(values));
   };
 
   componentWillReceiveProps({ post }) {

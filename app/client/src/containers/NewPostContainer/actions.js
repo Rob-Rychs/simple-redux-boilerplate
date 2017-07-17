@@ -16,7 +16,7 @@ export const newPostSubmitFailure = err => ({
 
 export const submitNewPost = newPostData => dispatch => {
   dispatch(newPostSubmitInit());
-  if (!newPostData) dispatch(newPostSubmitFailure());
+  if (!newPostData) dispatch(newPostSubmitFailure('Missing data'));
   const id = Math.random().toString(36).slice(2);
   const timestamp = Date.now();
   const data = JSON.stringify({

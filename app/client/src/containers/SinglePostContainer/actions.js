@@ -42,6 +42,20 @@ export const fetchCommentsOnPostSuccess = comments => ({
   payload: comments,
 });
 
+export const newCommentInit = () => ({
+  type: types.NEW_COMMENT_INIT,
+});
+
+export const newCommentSuccess = comment => ({
+  type: types.NEW_COMMENT_SUCCESS,
+  payload: comment,
+});
+
+export const newCommentFailure = err => ({
+  type: types.NEW_COMMENT_FAILURE,
+  payload: err,
+});
+
 export const fetchPostDetails = postId => dispatch => {
   dispatch(fetchPostInit());
   fetch(`http://localhost:5001/posts/${postId}`, {
@@ -89,3 +103,45 @@ export const deletePost = postId => dispatch => {
     })
     .catch(err => dispatch(deletePostFailure(err)));
 };
+
+export const newComment = (newCommentData, postId) => dispatch => {
+  dispatch(newCommentInit());
+  if(!newCommentData || !postId) {
+     dispatch(newCommentFailure('Missing data'));
+  }
+  const id = Math.random().toString(36).slice(2);
+  const timestamp = Date.now();
+  const data = JSON.stringify({
+    id,
+    timestamp,
+    ...newCommentData,
+    parentId: postId
+  });
+  console.log(data);
+  fetch('http://localhost:5001/comments', {
+    method: 'POST',
+    headers: {
+      Authorization: 'bar',
+      'Content-Type': 'application/json',
+    },
+    body: data,
+  })
+    .then(res => res.json())
+    .then(commentResponse => {
+      console.log(commentResponse);
+      if (commentResponse.id === id) {
+        dispatch(newCommentSuccess(commentResponse));
+        fetch(`http://localhost:5001/posts/${postId}/comments`, {
+          headers: {
+            Authorization: 'bar',
+          },
+        })
+          .then(res => res.json())
+          .then(comments => dispatch(fetchCommentsOnPostSuccess(comments)))
+          .catch(err => dispatch(fetchCommentsOnPostFailure(err)));
+      } else {
+        dispatch(newCommentFailure('Error posting new comment...'));
+      }
+    })
+    .catch(err => dispatch(newCommentFailure(err)));
+}

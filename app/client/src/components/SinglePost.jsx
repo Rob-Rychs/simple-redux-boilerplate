@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-
+import NewComment from './NewComment';
 // "id": "6ni6ok3ym7mf1p33lnez",
 // "timestamp": 1468479767190,
 // "title": "Learn Redux in 10 minutes!",
@@ -23,6 +23,7 @@ const SinglePost = ({
   comments, // eslint-disable-line
   onDelete,
   onEdit,
+  doSubmit,
 }) => (
   <div style={{ margin: 20 }}>
     <div>
@@ -72,6 +73,8 @@ const SinglePost = ({
     </div>
     <hr />
     <div>
+      <NewComment doSubmit={doSubmit}/>
+      <hr />
       {comments && comments.length > 0
         ? comments.map(comment => (
             <div key={comment.id}>
@@ -93,6 +96,7 @@ SinglePost.propTypes = {
   voteScore: PropTypes.number.isRequired,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
+  doSubmit: PropTypes.func.isRequired,
 };
 
 export default SinglePost;
