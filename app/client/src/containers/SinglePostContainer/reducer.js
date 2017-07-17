@@ -88,6 +88,12 @@ const singlePostReducer = (state = initialState, action) => {
         msg: action.payload,
       };
     }
+    case types.VOTE_ON_POST_SUCCESS: {
+      return {
+        ...state,
+        post: { ...state.post, voteScore: action.payload },
+      };
+    }
     default:
       return state;
   }

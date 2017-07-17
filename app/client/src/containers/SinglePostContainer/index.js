@@ -31,6 +31,10 @@ class SinglePostContainer extends Component {
     const { actions } = this.props;
     actions.deleteComment(comment);
   };
+  handleOnVote = voteKey => {
+    const { actions, match: { params: { postId } } } = this.props;
+    actions.voteOnPost(voteKey, postId);
+  };
   render() {
     const {
       post,
@@ -45,7 +49,7 @@ class SinglePostContainer extends Component {
       <div>
         <div>
           {error && //eslint-disable-line
-            <h2 style={{ margin: 20 }}>
+            <h2 style={{ margin: 20, color: 'red' }}>
               {error.message ? error.message : error}
             </h2>}
           {isLoading && <h2>Loading...</h2>}
@@ -60,6 +64,7 @@ class SinglePostContainer extends Component {
                 this.context.router.history.push(`/posts/${postId}/edit`)}
               doSubmit={this.handleSubmit}
               onCommentDelete={this.handleCommentDelete}
+              onVote={this.handleOnVote}
             />
           </div>
         </div>

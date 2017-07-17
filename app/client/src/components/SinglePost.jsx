@@ -29,6 +29,8 @@ const SinglePost = ({
   onCommentDelete,
   commentError,
   msg,
+  voteKey,
+  onVote,
 }) => (
   <div style={{ margin: 20 }}>
     <div>
@@ -47,6 +49,11 @@ const SinglePost = ({
     </p>
     <p>Vote: {voteScore || 0}</p>
     <div style={{ pading: 5, marginBottom: 3 }}>
+      <select value={voteKey || 'none'} onChange={e => onVote(e.target.value)}>
+        <option value="none" defaultChecked disabled>Vote...</option>
+        <option value="upVote">Vote Up</option>
+        <option value="downVote">Vote Down</option>
+      </select>
       <button
         onClick={onEdit}
         style={{
@@ -110,6 +117,8 @@ SinglePost.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   doSubmit: PropTypes.func.isRequired,
+  onVote: PropTypes.func.isRequired,
+  voteKey: PropTypes.string.isRequired,
   onCommentDelete: PropTypes.func.isRequired,
   commentError: PropTypes.string.isRequired,
   msg: PropTypes.string.isRequired,

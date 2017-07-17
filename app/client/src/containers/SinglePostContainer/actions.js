@@ -66,6 +66,11 @@ export const deleteCommentFailure = err => ({
   payload: err,
 });
 
+export const voteOnPostSuccess = voteCount => ({
+  type: types.VOTE_ON_POST_SUCCESS,
+  payload: voteCount,
+});
+
 export const fetchPostDetails = postId => dispatch => {
   dispatch(fetchPostInit());
   fetch(`http://localhost:5001/posts/${postId}`, {
@@ -180,4 +185,24 @@ export const deleteComment = comment => dispatch => {
       }
     })
     .catch(err => dispatch(deleteCommentFailure(err)));
+};
+
+export const voteOnPost = (voteKey, postId) => dispatch => {
+  if (!voteKey || !postId) dispatch(fetchPostFailure('Missing params'));
+  fetch(`http://localhost:5001/posts/${postId}`, {
+    headers: {
+      Authorization: 'bar',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({ option: voteKey }),
+  })
+    .then(res => res.json())
+    .then(post => {
+      if (!post) dispatch(fetchPostFailure('Error while voting...'));
+      else {
+        dispatch(voteOnPostSuccess(post.voteScore));
+      }
+    })
+    .catch(err => dispatch(fetchPostFailure(err)));
 };
