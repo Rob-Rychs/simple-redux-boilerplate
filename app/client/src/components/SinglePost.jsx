@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import NewComment from './NewComment';
+import Comment from './Comment';
+
 // "id": "6ni6ok3ym7mf1p33lnez",
 // "timestamp": 1468479767190,
 // "title": "Learn Redux in 10 minutes!",
@@ -24,6 +26,9 @@ const SinglePost = ({
   onDelete,
   onEdit,
   doSubmit,
+  onCommentDelete,
+  commentError,
+  msg,
 }) => (
   <div style={{ margin: 20 }}>
     <div>
@@ -73,15 +78,23 @@ const SinglePost = ({
     </div>
     <hr />
     <div>
-      <NewComment doSubmit={doSubmit}/>
+      <NewComment doSubmit={doSubmit} />
       <hr />
-      {comments && comments.length > 0
-        ? comments.map(comment => (
-            <div key={comment.id}>
-              {comment.body} - <b>{comment.author}</b> <br /><br />
-            </div>
-          ))
-        : 'No Comments'}
+      <div>
+        {commentError && <p style={{ color: 'red' }}>{commentError}</p>}
+        {msg && <p style={{ color: 'green' }}>{msg}</p>}
+        {comments && comments.length > 0
+          ? comments.map(comment => (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                commentError={commentError}
+                msg={msg}
+                onCommentDelete={onCommentDelete}
+              />
+            ))
+          : 'No Comments'}
+      </div>
     </div>
   </div>
 );
@@ -97,6 +110,9 @@ SinglePost.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   doSubmit: PropTypes.func.isRequired,
+  onCommentDelete: PropTypes.func.isRequired,
+  commentError: PropTypes.string.isRequired,
+  msg: PropTypes.string.isRequired,
 };
 
 export default SinglePost;

@@ -56,6 +56,16 @@ export const newCommentFailure = err => ({
   payload: err,
 });
 
+export const deleteCommentSuccess = msg => ({
+  type: types.DELETE_COMMENT_SUCCESS,
+  payload: msg,
+});
+
+export const deleteCommentFailure = err => ({
+  type: types.DELETE_COMMENT_FAILURE,
+  payload: err,
+});
+
 export const fetchPostDetails = postId => dispatch => {
   dispatch(fetchPostInit());
   fetch(`http://localhost:5001/posts/${postId}`, {
@@ -106,8 +116,8 @@ export const deletePost = postId => dispatch => {
 
 export const newComment = (newCommentData, postId) => dispatch => {
   dispatch(newCommentInit());
-  if(!newCommentData || !postId) {
-     dispatch(newCommentFailure('Missing data'));
+  if (!newCommentData || !postId) {
+    dispatch(newCommentFailure('Missing data'));
   }
   const id = Math.random().toString(36).slice(2);
   const timestamp = Date.now();
@@ -115,7 +125,7 @@ export const newComment = (newCommentData, postId) => dispatch => {
     id,
     timestamp,
     ...newCommentData,
-    parentId: postId
+    parentId: postId,
   });
   console.log(data);
   fetch('http://localhost:5001/comments', {
@@ -144,4 +154,30 @@ export const newComment = (newCommentData, postId) => dispatch => {
       }
     })
     .catch(err => dispatch(newCommentFailure(err)));
-}
+};
+
+export const deleteComment = comment => dispatch => {
+  fetch(`http://localhost:5001/comments/${comment.id}`, {
+    headers: {
+      Authorization: 'bar',
+    },
+    method: 'DELETE',
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.deleted) {
+        dispatch(deleteCommentSuccess('Comment deleted successfully'));
+        fetch(`http://localhost:5001/posts/${comment.parentId}/comments`, {
+          headers: {
+            Authorization: 'bar',
+          },
+        })
+          .then(res => res.json())
+          .then(comments => dispatch(fetchCommentsOnPostSuccess(comments)))
+          .catch(err => dispatch(fetchCommentsOnPostFailure(err)));
+      } else {
+        dispatch(deleteCommentFailure('Error deleting comment...'));
+      }
+    })
+    .catch(err => dispatch(deleteCommentFailure(err)));
+};

@@ -24,10 +24,13 @@ class SinglePostContainer extends Component {
     actions.deletePost(postId);
   };
   handleSubmit = values => {
-    alert(JSON.stringify(values));
     const { actions, match: { params: { postId } } } = this.props;
     actions.newComment(values, postId);
-  }
+  };
+  handleCommentDelete = comment => {
+    const { actions } = this.props;
+    actions.deleteComment(comment);
+  };
   render() {
     const {
       post,
@@ -35,24 +38,30 @@ class SinglePostContainer extends Component {
       isLoading,
       error,
       match: { params: { postId } },
+      commentError,
+      msg,
     } = this.props;
     return (
       <div>
         <div>
-          {error //eslint-disable-line
-            ? <h2 style={{ margin: 20 }}>
-                {error.message ? error.message : error}
-              </h2>
-            : isLoading
-                ? <h2>Loading...</h2>
-                : <SinglePost
-                    {...post}
-                    comments={comments}
-                    onDelete={this.handleDelete}
-                    onEdit={() =>
-                      (window.location.href = `/posts/${postId}/edit`)}
-                    doSubmit={this.handleSubmit}
-                  />}
+          {error && //eslint-disable-line
+            <h2 style={{ margin: 20 }}>
+              {error.message ? error.message : error}
+            </h2>}
+          {isLoading && <h2>Loading...</h2>}
+          <div>
+            <SinglePost
+              {...post}
+              comments={comments}
+              commentError={commentError}
+              msg={msg}
+              onDelete={this.handleDelete}
+              onEdit={() =>
+                this.context.router.history.push(`/posts/${postId}/edit`)}
+              doSubmit={this.handleSubmit}
+              onCommentDelete={this.handleCommentDelete}
+            />
+          </div>
         </div>
       </div>
     );
@@ -70,6 +79,8 @@ const mapStateToProps = state => ({
   comments: state.singlePostContainer.comments,
   isLoading: state.singlePostContainer.isLoading,
   error: state.singlePostContainer.error,
+  commentError: state.singlePostContainer.commentError,
+  msg: state.singlePostContainer.msg,
 });
 
 const mapDispatchToProps = dispatch => ({

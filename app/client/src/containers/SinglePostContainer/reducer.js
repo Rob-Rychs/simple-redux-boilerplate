@@ -6,6 +6,7 @@ export const initialState = {
   isLoading: false,
   error: null,
   commentError: null,
+  msg: null,
 };
 
 const singlePostReducer = (state = initialState, action) => {
@@ -64,16 +65,28 @@ const singlePostReducer = (state = initialState, action) => {
       };
     }
     case types.NEW_COMMENT_INIT: {
-      return { ...state }
+      return { ...state };
     }
     case types.NEW_COMMENT_SUCCESS: {
-      return { ...state }
+      return { ...state };
     }
     case types.NEW_COMMENT_FAILURE: {
       return {
         ...state,
         commentError: action.payload,
-      }
+      };
+    }
+    case types.DELETE_COMMENT_FAILURE: {
+      return {
+        ...state,
+        commentError: action.payload,
+      };
+    }
+    case types.DELETE_COMMENT_SUCCESS: {
+      return {
+        ...state,
+        msg: action.payload,
+      };
     }
     default:
       return state;
