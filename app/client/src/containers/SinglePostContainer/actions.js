@@ -206,3 +206,33 @@ export const voteOnPost = (voteKey, postId) => dispatch => {
     })
     .catch(err => dispatch(fetchPostFailure(err)));
 };
+
+export const voteOnComment = (voteKey, commentId, postId) => dispatch => {
+  if (!voteKey || !commentId) dispatch(fetchPostFailure('Missing params'));
+  fetch(`http://localhost:5001/comments/${commentId}`, {
+    headers: {
+      Authorization: 'bar',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({ option: voteKey }),
+  })
+    .then(res => res.json())
+    .then(comment => {
+      if (!comment)
+        dispatch(
+          fetchCommentsOnPostFailure('Error while voting on comment...'),
+        );
+      else {
+        fetch(`http://localhost:5001/posts/${postId}/comments`, {
+          headers: {
+            Authorization: 'bar',
+          },
+        })
+          .then(res => res.json())
+          .then(comments => dispatch(fetchCommentsOnPostSuccess(comments)))
+          .catch(err => dispatch(fetchCommentsOnPostFailure(err)));
+      }
+    })
+    .catch(err => dispatch(fetchPostFailure(err)));
+};

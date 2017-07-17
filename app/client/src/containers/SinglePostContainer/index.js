@@ -35,6 +35,10 @@ class SinglePostContainer extends Component {
     const { actions, match: { params: { postId } } } = this.props;
     actions.voteOnPost(voteKey, postId);
   };
+  handleVoteComment = (voteKey, commentId) => {
+    const { actions, match: { params: { postId } } } = this.props;
+    actions.voteOnComment(voteKey, commentId, postId);
+  };
   render() {
     const {
       post,
@@ -65,6 +69,7 @@ class SinglePostContainer extends Component {
               doSubmit={this.handleSubmit}
               onCommentDelete={this.handleCommentDelete}
               onVote={this.handleOnVote}
+              onVoteComment={this.handleVoteComment}
             />
           </div>
         </div>

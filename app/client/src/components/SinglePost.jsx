@@ -29,8 +29,8 @@ const SinglePost = ({
   onCommentDelete,
   commentError,
   msg,
-  voteKey,
   onVote,
+  onVoteComment,
 }) => (
   <div style={{ margin: 20 }}>
     <div>
@@ -47,9 +47,9 @@ const SinglePost = ({
     <p>
       Category - <Link to={`/${category}/posts`}>{category || 'Random'}</Link>
     </p>
-    <p>Vote: {voteScore || 0}</p>
+    <p>Votes: {voteScore || 0}</p>
     <div style={{ pading: 5, marginBottom: 3 }}>
-      <select value={voteKey || 'none'} onChange={e => onVote(e.target.value)}>
+      <select value="none" onChange={e => onVote(e.target.value)}>
         <option value="none" defaultChecked disabled>Vote...</option>
         <option value="upVote">Vote Up</option>
         <option value="downVote">Vote Down</option>
@@ -98,6 +98,7 @@ const SinglePost = ({
                 commentError={commentError}
                 msg={msg}
                 onCommentDelete={onCommentDelete}
+                onVoteComment={onVoteComment}
               />
             ))
           : 'No Comments'}
@@ -118,7 +119,7 @@ SinglePost.propTypes = {
   onEdit: PropTypes.func.isRequired,
   doSubmit: PropTypes.func.isRequired,
   onVote: PropTypes.func.isRequired,
-  voteKey: PropTypes.string.isRequired,
+  onVoteComment: PropTypes.func.isRequired,
   onCommentDelete: PropTypes.func.isRequired,
   commentError: PropTypes.string.isRequired,
   msg: PropTypes.string.isRequired,
