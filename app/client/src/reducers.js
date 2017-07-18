@@ -8,6 +8,8 @@ import postsByCategoryContainer
 import singlePostContainer from './containers/SinglePostContainer/reducer';
 import newPostContainer from './containers/NewPostContainer/reducer';
 import editPostContainer from './containers/EditPostFormContainer/reducer';
+import editCommentContainer
+  from './containers/EditCommentFormContainer/reducer';
 
 const rootReducer = combineReducers({
   // combine all your reducers here
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   singlePostContainer,
   newPostContainer,
   editPostContainer,
+  editCommentContainer,
   form: formReducer,
 });
 

@@ -26,6 +26,10 @@ import {
 } from './containers/NewPostContainer/reducer';
 
 import {
+  initialState as editCommentContainer,
+} from './containers/EditCommentFormContainer/reducer';
+
+import {
   initialState as editPostContainer,
 } from './containers/EditPostFormContainer/reducer';
 
@@ -37,6 +41,7 @@ const initialState = {
   singlePostContainer,
   newPostContainer,
   editPostContainer,
+  editCommentContainer,
 };
 
 const loggerMiddleware = createLogger();
