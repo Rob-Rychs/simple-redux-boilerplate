@@ -8,7 +8,7 @@ import * as NewPostActions from './actions';
 import NewPost from '../../components/NewPost';
 
 class NewPostContainer extends Component {
-  doSubmit = values => {
+  handleSubmit = values => {
     console.log('form submitted');
     const { actions } = this.props;
     actions.submitNewPost(values);
@@ -29,7 +29,7 @@ class NewPostContainer extends Component {
           {error && <h2>{error.message}</h2>}
         </div>
         {!isLoading
-          ? <NewPost doSubmit={this.doSubmit} />
+          ? <NewPost doSubmit={this.handleSubmit} />
           : <h2>Loading...</h2>}
       </div>
     );

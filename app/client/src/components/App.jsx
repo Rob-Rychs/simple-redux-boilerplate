@@ -6,6 +6,7 @@ import HomePageContainer from '../containers/HomePageContainer';
 import PostsByCategoryContainer from '../containers/PostsByCategoryContainer';
 import SinglePostContainer from '../containers/SinglePostContainer';
 import NewPostContainer from '../containers/NewPostContainer';
+import EditPostContainer from '../containers/EditPostFormContainer';
 
 const FourOhFour = () => <h2>404</h2>;
 
@@ -33,7 +34,7 @@ const App = () => (
           <Route
             exact
             path="/posts/:postId/edit"
-            component={() => <h2>Edit Page</h2>}
+            component={EditPostContainer}
           />
           <Route exact path="/newpost" component={NewPostContainer} />
           <Route component={FourOhFour} />

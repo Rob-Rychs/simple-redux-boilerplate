@@ -25,6 +25,10 @@ import {
   initialState as newPostContainer,
 } from './containers/NewPostContainer/reducer';
 
+import {
+  initialState as editPostContainer,
+} from './containers/EditPostFormContainer/reducer';
+
 const initialState = {
   // collect initialState from all your containers
   homePageContainer,
@@ -32,6 +36,7 @@ const initialState = {
   postsByCategoryContainer,
   singlePostContainer,
   newPostContainer,
+  editPostContainer,
 };
 
 const loggerMiddleware = createLogger();

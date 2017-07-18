@@ -7,6 +7,7 @@ import postsByCategoryContainer
   from './containers/PostsByCategoryContainer/reducer';
 import singlePostContainer from './containers/SinglePostContainer/reducer';
 import newPostContainer from './containers/NewPostContainer/reducer';
+import editPostContainer from './containers/EditPostFormContainer/reducer';
 
 const rootReducer = combineReducers({
   // combine all your reducers here
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   postsByCategoryContainer,
   singlePostContainer,
   newPostContainer,
+  editPostContainer,
   form: formReducer,
 });
 
