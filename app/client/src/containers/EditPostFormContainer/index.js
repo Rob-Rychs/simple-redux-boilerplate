@@ -18,7 +18,10 @@ class EditPostFormContainer extends Component {
       <div>
         {this.props.isLoading //eslint-disable-line
           ? <h2>Loading...</h2>
-          : <EditPostForm doSubmit={this.handleSubmit} />}
+          : <EditPostForm
+              doSubmit={this.handleSubmit}
+              post={this.props.post} //eslint-disable-line
+            />}
 
       </div>
     );
