@@ -1,3 +1,4 @@
+import sortBy from 'sort-by';
 import * as types from './types';
 
 export const initialState = {
@@ -31,10 +32,19 @@ const postsByCategoryReducer = (state = initialState, action) => {
       };
     }
     case types.SET_SORT_BY: {
+      if (action.payload === 'none') {
+        return {
+          ...state,
+          sortBy: action.payload,
+        };
+      }
+      const newPostsState = Object.assign([], state.posts);
+      newPostsState.sort(sortBy(`-${action.payload}`));
+      console.log(newPostsState);
       return {
         ...state,
         sortBy: action.payload,
-        posts: state.posts.sort((a, b) => a.voteScore - b.voteScore),
+        posts: newPostsState,
       };
     }
     default:

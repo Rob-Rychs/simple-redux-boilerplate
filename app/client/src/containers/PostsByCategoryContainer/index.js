@@ -8,11 +8,12 @@ import PostsByCategory from '../../components/PostsByCategory';
 
 class PostsByCategoryContainer extends Component {
   componentDidMount() {
-    const category = this.props.match.params.category || null; //eslint-disable-line
+    const { actions, match: { params: { category } } } = this.props; //eslint-disable-line
     console.log(category);
     if (category)
-      this.props.actions.fetchPostsByCategory(category); //eslint-disable-line
-    else this.props.actions.fetchPostsByCategoryFailure(); //eslint-disable-line
+      actions.fetchPostsByCategory(category); //eslint-disable-line
+    else actions.fetchPostsByCategoryFailure(); //eslint-disable-line
+    actions.setSortByKey('none');
   }
 
   handleSort = value => {
@@ -36,7 +37,6 @@ class PostsByCategoryContainer extends Component {
             <option value="none" disabled>Sort By...</option>
             <option value="timestamp">Date</option>
             <option value="voteScore">Votes</option>
-            <option value="remove">None</option>
           </select>
         </div>
         {isLoading ? <h4>Loading...</h4> : <PostsByCategory posts={posts} />}
