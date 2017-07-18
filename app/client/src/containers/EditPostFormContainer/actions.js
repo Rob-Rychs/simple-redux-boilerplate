@@ -1,4 +1,5 @@
 import * as types from './types';
+import getToken from '../../utils/getToken';
 
 export const loadPostInit = () => ({
   type: types.LOAD_POST_DATA_INIT,
@@ -32,7 +33,7 @@ export const loadPost = postId => dispatch => {
   dispatch(loadPostInit());
   fetch(`http://localhost:5001/posts/${postId}`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
     },
   })
     .then(res => res.json())
@@ -48,7 +49,7 @@ export const updatePost = postData => dispatch => {
   dispatch(updatePostInit());
   fetch(`http://localhost:5001/posts/${postData.id}`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
       'Content-Type': 'application/json',
     },
     method: 'PUT',

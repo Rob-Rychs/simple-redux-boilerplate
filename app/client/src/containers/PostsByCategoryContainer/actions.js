@@ -1,4 +1,5 @@
 import * as types from './types';
+import getToken from '../../utils/getToken';
 
 const API_URL = 'http://localhost:5001';
 
@@ -20,7 +21,7 @@ export const fetchPostsByCategory = category => dispatch => {
   dispatch(fetchPostsByCategoryInitiate());
   fetch(`${API_URL}/${category}/posts`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
     },
   })
     .then(res => res.json())

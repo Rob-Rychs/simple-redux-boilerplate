@@ -1,4 +1,5 @@
 import * as types from './types';
+import getToken from '../../utils/getToken';
 
 export const fetchPostInit = () => ({
   type: types.FETCH_POST_INIT,
@@ -75,7 +76,7 @@ export const fetchPostDetails = postId => dispatch => {
   dispatch(fetchPostInit());
   fetch(`http://localhost:5001/posts/${postId}`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
     },
   })
     .then(res => res.json())
@@ -84,7 +85,7 @@ export const fetchPostDetails = postId => dispatch => {
         dispatch(fetchPostSuccess(post));
         fetch(`http://localhost:5001/posts/${postId}/comments`, {
           headers: {
-            Authorization: 'bar',
+            Authorization: getToken(),
           },
         })
           .then(res => res.json())
@@ -104,7 +105,7 @@ export const deletePost = postId => dispatch => {
   dispatch(deletePostInit());
   fetch(`http://localhost:5001/posts/${postId}`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
     },
     method: 'DELETE',
   })
@@ -136,7 +137,7 @@ export const newComment = (newCommentData, postId) => dispatch => {
   fetch('http://localhost:5001/comments', {
     method: 'POST',
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
       'Content-Type': 'application/json',
     },
     body: data,
@@ -148,7 +149,7 @@ export const newComment = (newCommentData, postId) => dispatch => {
         dispatch(newCommentSuccess(commentResponse));
         fetch(`http://localhost:5001/posts/${postId}/comments`, {
           headers: {
-            Authorization: 'bar',
+            Authorization: getToken(),
           },
         })
           .then(res => res.json())
@@ -164,7 +165,7 @@ export const newComment = (newCommentData, postId) => dispatch => {
 export const deleteComment = comment => dispatch => {
   fetch(`http://localhost:5001/comments/${comment.id}`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
     },
     method: 'DELETE',
   })
@@ -191,7 +192,7 @@ export const voteOnPost = (voteKey, postId) => dispatch => {
   if (!voteKey || !postId) dispatch(fetchPostFailure('Missing params'));
   fetch(`http://localhost:5001/posts/${postId}`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
       'Content-Type': 'application/json',
     },
     method: 'POST',
@@ -211,7 +212,7 @@ export const voteOnComment = (voteKey, commentId, postId) => dispatch => {
   if (!voteKey || !commentId) dispatch(fetchPostFailure('Missing params'));
   fetch(`http://localhost:5001/comments/${commentId}`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
       'Content-Type': 'application/json',
     },
     method: 'POST',
@@ -226,7 +227,7 @@ export const voteOnComment = (voteKey, commentId, postId) => dispatch => {
       else {
         fetch(`http://localhost:5001/posts/${postId}/comments`, {
           headers: {
-            Authorization: 'bar',
+            Authorization: getToken(),
           },
         })
           .then(res => res.json())

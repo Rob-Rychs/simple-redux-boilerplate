@@ -1,4 +1,5 @@
 import * as types from './types';
+import getToken from '../../utils/getToken';
 
 export const loadCommentInit = () => ({
   type: types.LOAD_COMMENT_DATA_INIT,
@@ -32,7 +33,7 @@ export const loadComment = commentId => dispatch => {
   dispatch(loadCommentInit());
   fetch(`http://localhost:5001/comments/${commentId}`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
     },
   })
     .then(res => res.json())
@@ -51,7 +52,7 @@ export const updateComment = commentData => dispatch => {
   dispatch(updateCommentInit());
   fetch(`http://localhost:5001/comments/${commentData.id}`, {
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
       'Content-Type': 'application/json',
     },
     method: 'PUT',

@@ -1,4 +1,5 @@
 import * as types from './types';
+import getToken from '../../utils/getToken';
 
 export const newPostSubmitInit = () => ({
   type: types.SUBMIT_NEW_POST_INIT,
@@ -28,7 +29,7 @@ export const submitNewPost = newPostData => dispatch => {
   fetch('http://localhost:5001/posts', {
     method: 'POST',
     headers: {
-      Authorization: 'bar',
+      Authorization: getToken(),
       'Content-Type': 'application/json',
     },
     body: data,
