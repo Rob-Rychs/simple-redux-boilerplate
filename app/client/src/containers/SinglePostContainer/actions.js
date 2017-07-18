@@ -75,19 +75,19 @@ export const voteOnPostSuccess = voteCount => ({
 export const fetchPostDetails = postId => dispatch => {
   dispatch(fetchPostInit());
   fetch(`http://localhost:5001/posts/${postId}`, {
-    headers: {
-      Authorization: getToken(),
-    },
-  })
+      headers: {
+        Authorization: getToken(),
+      },
+    })
     .then(res => res.json())
     .then(post => {
       if (Object.keys(post).length > 0) {
         dispatch(fetchPostSuccess(post));
         fetch(`http://localhost:5001/posts/${postId}/comments`, {
-          headers: {
-            Authorization: getToken(),
-          },
-        })
+            headers: {
+              Authorization: getToken(),
+            },
+          })
           .then(res => res.json())
           .then(comments => dispatch(fetchCommentsOnPostSuccess(comments)))
           .catch(err => dispatch(fetchCommentsOnPostFailure(err)));
@@ -104,11 +104,11 @@ export const fetchPostDetails = postId => dispatch => {
 export const deletePost = postId => dispatch => {
   dispatch(deletePostInit());
   fetch(`http://localhost:5001/posts/${postId}`, {
-    headers: {
-      Authorization: getToken(),
-    },
-    method: 'DELETE',
-  })
+      headers: {
+        Authorization: getToken(),
+      },
+      method: 'DELETE',
+    })
     .then(res => {
       // console.log('Delete: ', JSON.stringify(res));
       if (Object.keys(res).length === 0) {
@@ -135,23 +135,23 @@ export const newComment = (newCommentData, postId) => dispatch => {
   });
   console.log(data);
   fetch('http://localhost:5001/comments', {
-    method: 'POST',
-    headers: {
-      Authorization: getToken(),
-      'Content-Type': 'application/json',
-    },
-    body: data,
-  })
+      method: 'POST',
+      headers: {
+        Authorization: getToken(),
+        'Content-Type': 'application/json',
+      },
+      body: data,
+    })
     .then(res => res.json())
     .then(commentResponse => {
       console.log(commentResponse);
       if (commentResponse.id === id) {
         dispatch(newCommentSuccess(commentResponse));
         fetch(`http://localhost:5001/posts/${postId}/comments`, {
-          headers: {
-            Authorization: getToken(),
-          },
-        })
+            headers: {
+              Authorization: getToken(),
+            },
+          })
           .then(res => res.json())
           .then(comments => dispatch(fetchCommentsOnPostSuccess(comments)))
           .catch(err => dispatch(fetchCommentsOnPostFailure(err)));
@@ -164,20 +164,20 @@ export const newComment = (newCommentData, postId) => dispatch => {
 
 export const deleteComment = comment => dispatch => {
   fetch(`http://localhost:5001/comments/${comment.id}`, {
-    headers: {
-      Authorization: getToken(),
-    },
-    method: 'DELETE',
-  })
+      headers: {
+        Authorization: getToken(),
+      },
+      method: 'DELETE',
+    })
     .then(res => res.json())
     .then(data => {
       if (data.deleted) {
         dispatch(deleteCommentSuccess('Comment deleted successfully'));
         fetch(`http://localhost:5001/posts/${comment.parentId}/comments`, {
-          headers: {
-            Authorization: 'bar',
-          },
-        })
+            headers: {
+              Authorization: 'bar',
+            },
+          })
           .then(res => res.json())
           .then(comments => dispatch(fetchCommentsOnPostSuccess(comments)))
           .catch(err => dispatch(fetchCommentsOnPostFailure(err)));
@@ -191,13 +191,15 @@ export const deleteComment = comment => dispatch => {
 export const voteOnPost = (voteKey, postId) => dispatch => {
   if (!voteKey || !postId) dispatch(fetchPostFailure('Missing params'));
   fetch(`http://localhost:5001/posts/${postId}`, {
-    headers: {
-      Authorization: getToken(),
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify({ option: voteKey }),
-  })
+      headers: {
+        Authorization: getToken(),
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        option: voteKey
+      }),
+    })
     .then(res => res.json())
     .then(post => {
       if (!post) dispatch(fetchPostFailure('Error while voting...'));
@@ -211,13 +213,15 @@ export const voteOnPost = (voteKey, postId) => dispatch => {
 export const voteOnComment = (voteKey, commentId, postId) => dispatch => {
   if (!voteKey || !commentId) dispatch(fetchPostFailure('Missing params'));
   fetch(`http://localhost:5001/comments/${commentId}`, {
-    headers: {
-      Authorization: getToken(),
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify({ option: voteKey }),
-  })
+      headers: {
+        Authorization: getToken(),
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        option: voteKey
+      }),
+    })
     .then(res => res.json())
     .then(comment => {
       if (!comment)
@@ -226,10 +230,10 @@ export const voteOnComment = (voteKey, commentId, postId) => dispatch => {
         );
       else {
         fetch(`http://localhost:5001/posts/${postId}/comments`, {
-          headers: {
-            Authorization: getToken(),
-          },
-        })
+            headers: {
+              Authorization: getToken(),
+            },
+          })
           .then(res => res.json())
           .then(comments => dispatch(fetchCommentsOnPostSuccess(comments)))
           .catch(err => dispatch(fetchCommentsOnPostFailure(err)));
