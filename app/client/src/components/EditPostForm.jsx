@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { min15, max100, required } from '../utils/validations';
+
 const renderTextField = ({
   input,
   textarea,
@@ -132,6 +133,7 @@ EditPostForm.propTypes = {
 EditPostForm = reduxForm({
   form: 'editPostForm',
   validate,
+  enableReinitialize: true,
 })(EditPostForm);
 
 export default EditPostForm;
