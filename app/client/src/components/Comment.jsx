@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Comment = ({ comment, onCommentDelete, onVoteComment }) => (
-  <div key={comment.id}>
+  <div>
     {comment.voteScore} - {comment.body} - <b>{comment.author}</b>
     <div style={{ pading: 5, marginBottom: 3 }}>
       <select

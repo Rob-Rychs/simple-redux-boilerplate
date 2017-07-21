@@ -15,6 +15,7 @@ const singlePostReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        msg: null,
       };
     }
     case types.DELETE_POST_INIT: {
@@ -85,7 +86,8 @@ const singlePostReducer = (state = initialState, action) => {
     case types.DELETE_COMMENT_SUCCESS: {
       return {
         ...state,
-        msg: action.payload,
+        comments: state.comments.filter(obj => obj.id !== action.payload.id),
+        msg: action.payload.msg,
       };
     }
     case types.VOTE_ON_POST_SUCCESS: {
